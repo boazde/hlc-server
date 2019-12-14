@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 const HLCServer = require('../lib/hlcserver.js');
+const BarnowlReel = require('barnowl-reel'); // 1: Include the interface package
+//const BarnaclesWebhook = require('barnacles-webhook'); // 1: Include the package
+
 
 const options = {
     barnowl: { enableMixing: true },
@@ -8,3 +11,7 @@ const options = {
 };
 
 let app = new HLCServer(options);
+
+// 2: Add the specific listener with relevant options
+app.addListener(BarnowlReel, {}, BarnowlReel.SerialListener, { path: "auto" });
+//app.addInterface(BarnaclesWebhook, { hostname: "https://elastic:hM2WKUp6Djtzh9hx8Ud2yecy@2a04541e89814b0398695199b71d723c.us-east-1.aws.found.io", port: 9243 });
